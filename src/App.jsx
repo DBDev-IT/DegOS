@@ -4,7 +4,10 @@ import DegDeathScreen from "./components/deg-death-screen/deg-death-screen";
 
 function App() {
 	const [mode, setMode] = useState("dip");
-	const [dipContent, setDipContent] = useState(["Deg Dip", "Initializing..."]);
+	const [dipContent, setDipContent] = useState([
+		"Deg Dip",
+		"Initializing..."
+	]);
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
@@ -27,7 +30,7 @@ function App() {
 					))}
 				</div>
 			)}
-			
+
 			{mode === "degos" && (
 				<div className="degos">
 					<h1>DegOS</h1>
