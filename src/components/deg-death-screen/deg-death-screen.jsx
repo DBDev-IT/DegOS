@@ -36,7 +36,7 @@ class DegDeathScreen extends Component {
 						</details>
 					</>
 				) : (
-					<p>Please report what you were doing when this happened.</p>
+					<p>Please report what you were doing before this happened.</p>
 				)}
 				{this.props.reboot ? (
 					<>
