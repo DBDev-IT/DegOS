@@ -1,7 +1,9 @@
 :root {
 	--bg: #000000;
+	--text: #ffffff;
 	--mono: ui-monospace, Consolas, monospace;
 
+	color: var(--text);
 	letter-spacing: 0.18rem;
 	background: var(--bg);
 	font-synthesis: none;

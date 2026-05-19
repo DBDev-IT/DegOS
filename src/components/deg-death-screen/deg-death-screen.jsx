@@ -4,7 +4,11 @@ import "./deg-death-screen.css";
 class DegDeathScreen extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { error: this.props.error || null };
+		this.state = { error: null };
+	}
+
+	static getDerivedStateFromError(error) {
+		return { error };
 	}
 
 	componentDidCatch(error, errorInfo) {
@@ -12,22 +16,23 @@ class DegDeathScreen extends Component {
 		this.setState({ error });
 	}
 
-	handleReboot() {
-		this.setState({ error: null });
+	handleReboot = () => {
+		this.setState({ error: null })
 		this.props.reboot();
 	}
 
 	render() {
-		if (!this.state.error) return this.props.children;
+		const error = this.props.error || this.state.error;
+		if (!error) return this.props.children;
 		return (
 			<div className="container">
 				<h1>:0</h1>
 				<h2 className="heading">We are so sorry, but Deg encountered an error that couldn't be handled.</h2>
-				{this.state.error ? (
+				{error ? (
 					<>
 						<p>Please report this error:</p>
 						<details className="error">
-							{this.state.error}
+							{error}
 						</details>
 					</>
 				) : (
