@@ -3,7 +3,7 @@ import "./App.css";
 import DegDeathScreen from "./components/deg-death-screen/deg-death-screen";
 
 function App() {
-	const [mode, setMode] = useState("dih");
+	const [mode, setMode] = useState("dip");
 	const [dipContent, setDipContent] = useState(["Deg Dip", "Initializing..."]);
 	const [error, setError] = useState(null);
 
