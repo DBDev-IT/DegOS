@@ -9,7 +9,7 @@
 		"preview": "vite preview",
 		"lint": "eslint . --report-unused-disable-directives --max-warnings 0",
 		"lint:fix": "eslint . --fix",
-		"format": "prettier --write \"**/*.{json,js,jsx,css,md}\""
+		"format": "prettier --write \"**/*.{json,js,jsx,css,md,yml}\""
 	},
 	"dependencies": {
 		"react": "^19.2.6",
