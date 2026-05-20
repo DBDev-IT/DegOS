@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import "./death-screen.css";
 
 class DeathScreen extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { error: null };
+		this.handleReboot = this.handleReboot.bind(this);
 	}
 
 	static getDerivedStateFromError(error) {
@@ -16,10 +17,10 @@ class DeathScreen extends Component {
 		this.setState({ error });
 	}
 
-	handleReboot = () => {
+	handleReboot() {
 		this.setState({ error: null });
 		this.props.reboot();
-	};
+	}
 
 	render() {
 		const error = this.props.error || this.state.error;

@@ -13,12 +13,6 @@ function App() {
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		if (!(mode === "dip" || mode === "degos")) {
-			setError("Could not determine mode.");
-		}
-	}, [mode]);
-
-	useEffect(() => {
 		DIP.initialize(setCommandLineContent, [
 			"Deg Dip",
 			"Initialized.",
