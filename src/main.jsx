@@ -2,12 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
-import DegDeathScreen from "./components/deg-death-screen/deg-death-screen";
+import DeathScreen from "./components/death-screen/death-screen";
 
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
-		<DegDeathScreen>
+		<DeathScreen>
 			<App />
-		</DegDeathScreen>
+		</DeathScreen>
 	</StrictMode>
 );

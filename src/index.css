@@ -1,5 +1,8 @@
 :root {
 	--bg: #000000;
+	--accent: #1196ef;
+	--success: #4caf50;
+	--error: #f44336;
 	--text: #ffffff;
 	--mono: ui-monospace, Consolas, monospace;
 
@@ -26,7 +29,6 @@ body {
 }
 
 #root {
-	width: 1126px;
 	max-width: 100%;
 	margin: 0 auto;
 	border-inline: 1px solid var(--border);

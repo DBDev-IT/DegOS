@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./deg-death-screen.css";
+import "./death-screen.css";
 
-class DegDeathScreen extends Component {
+class DeathScreen extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { error: null };
@@ -59,4 +59,4 @@ class DegDeathScreen extends Component {
 	}
 }
 
-export default DegDeathScreen;
+export default DeathScreen;

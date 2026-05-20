@@ -1,34 +1,50 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import DegDeathScreen from "./components/deg-death-screen/deg-death-screen";
+import CommandLine from "./components/command-line/command-line";
+import DeathScreen from "./components/death-screen/death-screen";
+import DIP from "./lib/dip";
 
 function App() {
 	const [mode, setMode] = useState("dip");
-	const [dipContent, setDipContent] = useState([
+	const [commandLineContent, setCommandLineContent] = useState([
 		"Deg Dip",
 		"Initializing..."
 	]);
 	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		if (!(mode === "dip" || mode === "degos"))
+		if (!(mode === "dip" || mode === "degos")) {
 			setError("Could not determine mode.");
+		}
 	}, [mode]);
+
+	useEffect(() => {
+		DIP.initialize(setCommandLineContent, ["Deg Dip", "Initialized.", "Welcome to Deg Dip! Use 'help' for commands."]);
+		window.DIP = DIP;
+	}, []);
 
 	function reboot() {
 		setError(null);
 		setMode("dip");
-		setDipContent(["Deg Dip", "Rebooting..."]);
+		setCommandLineContent(["Deg Dip", "Rebooting... (0/2)"]);
+		if (window.DIP && typeof window.DIP.initialize === "function") {
+			window.DIP.initialize(setCommandLineContent, ["Deg Dip", "Rebooting... (1/2)"]);
+			window.DIP.setLines(["Deg Dip", "Rebooted (2/2)"]);
+		} else if (DIP && typeof DIP.initialize === "function") {
+			DIP.initialize(setCommandLineContent, ["Deg Dip", "Rebooting... (1/2)"]);
+			window.DIP = DIP;
+			window.DIP.setLines(["Deg Dip", "Rebooted (2/2)"]);
+		} else
+			setError("DIP SDK is not available.");
 	}
 
 	return (
-		<DegDeathScreen reboot={reboot} error={error}>
+		<DeathScreen reboot={reboot} error={error}>
 			{mode === "dip" && (
-				<div className="dip">
-					{dipContent.map((line, index) => (
-						<p key={index}>{line}</p>
-					))}
-				</div>
+				<CommandLine
+					content={commandLineContent}
+					setContent={setCommandLineContent}
+				/>
 			)}
 
 			{mode === "degos" && (
@@ -36,7 +52,7 @@ function App() {
 					<h1>DegOS</h1>
 				</div>
 			)}
-		</DegDeathScreen>
+		</DeathScreen>
 	);
 }
 

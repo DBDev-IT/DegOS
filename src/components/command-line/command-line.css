@@ -1,0 +1,42 @@
+.command-line {
+	color: white;
+	font-family: var(--mono);
+	padding: 20px;
+	white-space: pre-wrap;
+	outline: none;
+}
+
+.command-line .input-line {
+	display: flex;
+	align-items: center;
+}
+
+.command-line .prompt {
+	color: var(--accent);
+	margin-right: 11px;
+}
+
+.command-line .input-text {
+	color: white;
+	font-family: inherit;
+}
+
+.command-line .cursor {
+	display: inline-block;
+	width: 10px;
+	height: 1em;
+	background: white;
+	vertical-align: middle;
+	animation: dip-blink 1s steps(2, start) infinite;
+}
+
+@keyframes dip-blink {
+	0%,
+	50% {
+		opacity: 1;
+	}
+	50.01%,
+	100% {
+		opacity: 0;
+	}
+}
