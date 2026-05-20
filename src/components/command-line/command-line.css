@@ -4,6 +4,7 @@
 	padding: 20px;
 	white-space: pre-wrap;
 	outline: none;
+	height: 95vh;
 }
 
 .command-line .input-line {

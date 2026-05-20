@@ -10,13 +10,21 @@ const helpLines = [
 ];
 
 function CommandLine(props) {
-	const { getLines, addLines, setLines } = window.DIP;
+	const { addLines, setLines } = window.DIP;
 	const [input, setInput] = useState("");
 	const containerRef = useRef(null);
+	const bottomRef = useRef(null);
 
 	useEffect(() => {
 		containerRef.current?.focus();
 	}, []);
+
+	useEffect(() => {
+		bottomRef.current?.scrollIntoView({
+			behavior: "instant",
+			block: "nearest"
+		});
+	}, [props.lines]);
 
 	function executeCommand(raw) {
 		const splitted = String(raw || "")
@@ -91,6 +99,7 @@ function CommandLine(props) {
 				<span className="input-text">{String(input)}</span>
 				<span className="cursor" aria-hidden="true" />
 			</p>
+			<div ref={bottomRef} />
 		</div>
 	);
 }
