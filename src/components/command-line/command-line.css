@@ -18,8 +18,20 @@
 }
 
 .command-line .input-text {
+	flex: 1;
+	min-width: 0;
 	color: white;
 	font-family: inherit;
+	background: transparent;
+	border: none;
+	outline: none;
+	caret-color: white;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+.command-line .input-text::placeholder {
+	color: rgba(255, 255, 255, 0.5);
 }
 
 .command-line .cursor {

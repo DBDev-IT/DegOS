@@ -13,10 +13,11 @@ function CommandLine(props) {
 	const { addLines, setLines } = window.DIP;
 	const [input, setInput] = useState("");
 	const containerRef = useRef(null);
+	const inputRef = useRef(null);
 	const bottomRef = useRef(null);
 
 	useEffect(() => {
-		containerRef.current?.focus();
+		inputRef.current?.focus();
 	}, []);
 
 	useEffect(() => {
@@ -67,28 +68,18 @@ function CommandLine(props) {
 			e.preventDefault();
 			executeCommand(input);
 			setInput("");
-			return;
 		}
+	}
 
-		if (e.key === "Backspace") {
-			e.preventDefault();
-			setInput((s) => s.slice(0, -1));
-			return;
-		}
-
-		if (e.key.length === 1 && !e.ctrlKey && !e.metaKey) {
-			e.preventDefault();
-			setInput((s) => s + e.key);
-		}
+	function onChange(e) {
+		setInput(e.target.value);
 	}
 
 	return (
 		<div
 			className="command-line"
-			tabIndex={0}
 			ref={containerRef}
-			onKeyDown={onKeyDown}
-			onMouseDown={() => containerRef.current?.focus()}
+			onMouseDown={() => inputRef.current?.focus()}
 		>
 			{props.lines.map((line, index) => (
 				<p key={index}>{String(line)}</p>
@@ -96,8 +87,18 @@ function CommandLine(props) {
 
 			<p className="input-line">
 				<span className="prompt">&gt;</span>
-				<span className="input-text">{String(input)}</span>
-				<span className="cursor" aria-hidden="true" />
+				<input
+					className="input-text"
+					type="text"
+					ref={inputRef}
+					value={input}
+					onChange={onChange}
+					onKeyDown={onKeyDown}
+					autoCapitalize="off"
+					autoCorrect="off"
+					spellCheck="false"
+					inputMode="text"
+				/>
 			</p>
 			<div ref={bottomRef} />
 		</div>
