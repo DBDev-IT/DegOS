@@ -28,18 +28,19 @@ function CommandLine(props) {
 	}, [props.lines]);
 
 	function executeCommand(raw) {
+		const safe = String(raw || "").trim();
 		const splitted = String(raw || "")
 			.trim()
 			.split(" ");
 		const cmd = splitted[0] || "";
 		const args = splitted.slice(1);
 		if (cmd === "") {
-			addLines(["> " + cmd]);
+			addLines(["> " + safe]);
 			return;
 		}
 
 		if (cmd === "help") {
-			addLines([`> ${cmd}`, ...helpLines]);
+			addLines([`> ${safe}`, ...helpLines]);
 			return;
 		}
 
@@ -50,17 +51,17 @@ function CommandLine(props) {
 
 		if (cmd === "echo") {
 			const rest = args.join(" ");
-			addLines([`> ${cmd}`, rest]);
+			addLines([`> ${safe}`, rest]);
 			return;
 		}
 
 		if (cmd === "degos") {
-			addLines([`> ${cmd}`, "Switching to DegOS..."]);
+			addLines([`> ${safe}`, "Switching to DegOS..."]);
 			props.setMode("degos");
 			return;
 		}
 
-		addLines([`> ${cmd}`, `Unknown command: ${cmd}. Type 'help'.`]);
+		addLines([`> ${safe}`, `Unknown command: ${cmd}. Type 'help'.`]);
 	}
 
 	function onKeyDown(e) {
