@@ -13,15 +13,10 @@ function CommandLine(props) {
 	const { getLines, addLines, setLines } = window.DIP;
 	const [input, setInput] = useState("");
 	const containerRef = useRef(null);
-	const hiddenInputRef = useRef(null);
 
 	useEffect(() => {
-		hiddenInputRef.current?.focus();
+		containerRef.current?.focus();
 	}, []);
-
-	function focusHiddenInput() {
-		hiddenInputRef.current?.focus();
-	}
 
 	function executeCommand(raw) {
 		const splitted = String(raw || "")
@@ -85,23 +80,9 @@ function CommandLine(props) {
 			tabIndex={0}
 			ref={containerRef}
 			onKeyDown={onKeyDown}
-			onPointerDown={focusHiddenInput}
-			onMouseDown={focusHiddenInput}
-			onTouchStart={focusHiddenInput}
+			onMouseDown={() => containerRef.current?.focus()}
 		>
-			<input
-				ref={hiddenInputRef}
-				className="command-line-hidden-input"
-				value={input}
-				onChange={(e) => setInput(e.target.value)}
-				onKeyDown={onKeyDown}
-				autoCapitalize="none"
-				autoComplete="off"
-				autoCorrect="off"
-				spellCheck="false"
-				aria-hidden="true"
-			/>
-			{getLines().map((line, index) => (
+			{props.lines.map((line, index) => (
 				<p key={index}>{String(line)}</p>
 			))}
 

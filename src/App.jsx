@@ -46,10 +46,16 @@ function App() {
 			{mode === "dip" &&
 				(!window.DIP ? (
 					<div className="command-line">
-						{commandLineContent.map((line) => <p key={line}>{line}</p>)}
+						{commandLineContent.map((line) => (
+							<p key={line}>{line}</p>
+						))}
 					</div>
 				) : (
-					<CommandLine mode={mode} setMode={setMode} />
+					<CommandLine
+						mode={mode}
+						setMode={setMode}
+						lines={commandLineContent}
+					/>
 				))}
 
 			{mode === "degos" && (
