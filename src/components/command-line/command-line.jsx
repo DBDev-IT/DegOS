@@ -18,7 +18,9 @@ function CommandLine(props) {
 	}, []);
 
 	function executeCommand(raw) {
-		const splitted = String(raw || "").trim().split(" ");
+		const splitted = String(raw || "")
+			.trim()
+			.split(" ");
 		const cmd = splitted[0] || "";
 		const args = splitted.slice(1);
 		if (cmd === "") {
@@ -42,7 +44,11 @@ function CommandLine(props) {
 			return;
 		}
 
-		setContent([...content, `> ${cmd}`, `Unknown command: ${cmd}. Type 'help'.`]);
+		setContent([
+			...content,
+			`> ${cmd}`,
+			`Unknown command: ${cmd}. Type 'help'.`
+		]);
 	}
 
 	function onKeyDown(e) {

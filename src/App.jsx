@@ -19,7 +19,11 @@ function App() {
 	}, [mode]);
 
 	useEffect(() => {
-		DIP.initialize(setCommandLineContent, ["Deg Dip", "Initialized.", "Welcome to Deg Dip! Use 'help' for commands."]);
+		DIP.initialize(setCommandLineContent, [
+			"Deg Dip",
+			"Initialized.",
+			"Welcome to Deg Dip! Use 'help' for commands."
+		]);
 		window.DIP = DIP;
 	}, []);
 
@@ -28,14 +32,19 @@ function App() {
 		setMode("dip");
 		setCommandLineContent(["Deg Dip", "Rebooting... (0/2)"]);
 		if (window.DIP && typeof window.DIP.initialize === "function") {
-			window.DIP.initialize(setCommandLineContent, ["Deg Dip", "Rebooting... (1/2)"]);
+			window.DIP.initialize(setCommandLineContent, [
+				"Deg Dip",
+				"Rebooting... (1/2)"
+			]);
 			window.DIP.setLines(["Deg Dip", "Rebooted (2/2)"]);
 		} else if (DIP && typeof DIP.initialize === "function") {
-			DIP.initialize(setCommandLineContent, ["Deg Dip", "Rebooting... (1/2)"]);
+			DIP.initialize(setCommandLineContent, [
+				"Deg Dip",
+				"Rebooting... (1/2)"
+			]);
 			window.DIP = DIP;
 			window.DIP.setLines(["Deg Dip", "Rebooted (2/2)"]);
-		} else
-			setError("DIP SDK is not available.");
+		} else setError("DIP SDK is not available.");
 	}
 
 	return (
