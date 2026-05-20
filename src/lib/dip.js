@@ -1,3 +1,5 @@
+import bindAll from "bindAll";
+
 const DIP = {
 	_setContent: null,
 	_lines: [],
@@ -57,5 +59,7 @@ const DIP = {
 		}
 	}
 };
+
+bindAll(DIP);
 
 export default DIP;

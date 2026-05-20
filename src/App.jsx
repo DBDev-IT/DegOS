@@ -43,12 +43,14 @@ function App() {
 
 	return (
 		<DeathScreen reboot={reboot} error={error}>
-			{mode === "dip" && (
-				<CommandLine
-					content={commandLineContent}
-					setContent={setCommandLineContent}
-				/>
-			)}
+			{mode === "dip" &&
+				(!window.DIP ? (
+					<div className="command-line">
+						{commandLineContent.map((line) => <p key={line}>{line}</p>)}
+					</div>
+				) : (
+					<CommandLine mode={mode} setMode={setMode} />
+				))}
 
 			{mode === "degos" && (
 				<div className="degos">

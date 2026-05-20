@@ -33,10 +33,24 @@ class DeathScreen extends Component {
 					be handled.
 				</h2>
 				{error ? (
-					<>
-						<p>Please report this error:</p>
-						<details className="error">{error}</details>
-					</>
+					(() => {
+						const isObject = error && typeof error === "object";
+						const message = isObject
+							? error.message || String(error)
+							: String(error);
+						const details = isObject
+							? error.stack || String(error)
+							: String(error);
+						return (
+							<>
+								<p>Please report this error:</p>
+								<details className="error">
+									<summary>{message}</summary>
+									<pre>{details}</pre>
+								</details>
+							</>
+						);
+					})()
 				) : (
 					<p>
 						Please report what you were doing before this happened.

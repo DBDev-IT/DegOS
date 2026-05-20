@@ -5,11 +5,12 @@ const helpLines = [
 	"Available commands:",
 	"help - show this message",
 	"clear - clear the console",
-	"echo <text> - print text to console"
+	"echo <text> - print text to console",
+	"degos - switch to DegOS"
 ];
 
 function CommandLine(props) {
-	const { content, setContent } = props;
+	const { getLines, addLines, setLines } = window.DIP;
 	const [input, setInput] = useState("");
 	const containerRef = useRef(null);
 
@@ -24,31 +25,33 @@ function CommandLine(props) {
 		const cmd = splitted[0] || "";
 		const args = splitted.slice(1);
 		if (cmd === "") {
-			setContent([...content, "> " + cmd]);
+			addLines(["> " + cmd]);
 			return;
 		}
 
 		if (cmd === "help") {
-			setContent([...content, `> ${cmd}`, ...helpLines]);
+			addLines([`> ${cmd}`, ...helpLines]);
 			return;
 		}
 
 		if (cmd === "clear") {
-			setContent([]);
+			setLines([]);
 			return;
 		}
 
 		if (cmd === "echo") {
 			const rest = args.join(" ");
-			setContent([...content, `> ${cmd}`, rest]);
+			addLines([`> ${cmd}`, rest]);
 			return;
 		}
 
-		setContent([
-			...content,
-			`> ${cmd}`,
-			`Unknown command: ${cmd}. Type 'help'.`
-		]);
+		if (cmd === "degos") {
+			addLines([`> ${cmd}`, "Switching to DegOS..."]);
+			props.setMode("degos");
+			return;
+		}
+
+		addLines([`> ${cmd}`, `Unknown command: ${cmd}. Type 'help'.`]);
 	}
 
 	function onKeyDown(e) {
@@ -79,7 +82,7 @@ function CommandLine(props) {
 			onKeyDown={onKeyDown}
 			onMouseDown={() => containerRef.current?.focus()}
 		>
-			{content.map((line, index) => (
+			{getLines().map((line, index) => (
 				<p key={index}>{String(line)}</p>
 			))}
 
